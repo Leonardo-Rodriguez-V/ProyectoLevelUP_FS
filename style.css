@@ -1,0 +1,262 @@
+/* ================= VARIABLES Y ESTILOS BASE ================= */
+:root {
+  --azul-electrico: #1E90FF;
+  --verde-neon: #39FF14;
+  --degradado-fondo: linear-gradient(
+    45deg, 
+    rgba(30, 144, 255, 0.15) 0%, 
+    rgba(0, 0, 0, 1) 50%, 
+    rgba(57, 255, 20, 0.15) 100%
+  );
+}
+
+/* ================= ESTILOS GENERALES ================= */
+body {
+  background: var(--degradado-fondo);
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(30, 144, 255, 0.05) 0px,
+      transparent 2px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(57, 255, 20, 0.05) 0px,
+      transparent 2px,
+      transparent 5px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ================= COMPONENTES PRINCIPALES ================= */
+/* ----- Navbar ----- */
+.navbar {
+  border-bottom: 2px solid var(--azul-electrico);
+  box-shadow: 0 0 15px var(--verde-neon);
+  z-index: 1000;
+}
+
+.glow-logo {
+  filter: drop-shadow(0 0 5px var(--verde-neon));
+}
+
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--verde-neon);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ----- Barra de Búsqueda ----- */
+.search-input {
+  background: rgba(0,0,0,0.8);
+  border: 2px solid var(--azul-electrico);
+  color: var(--verde-neon);
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 15px var(--verde-neon);
+}
+
+/* ================= SECCIONES ESPECÍFICAS ================= */
+/* ----- Catálogo ----- */
+#catalogo .card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+
+.texto-accent {
+  color: #00F7FF !important;
+}
+
+#catalogo .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s;
+}
+
+#catalogo .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px var(--verde-neon);
+}
+
+#catalogo .card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+#catalogo .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+}
+
+/* ----- optimazador ----------------------------------------------------------------------------*/
+/* Optimizar animaciones */
+#catalogo .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregar easing */
+}
+
+/* Mejorar responsividad en móviles */
+@media (max-width: 576px) {
+  #catalogo .card-img-top {
+    height: 150px;
+  }
+}
+
+
+/* ----- Carrusel ----- */
+#promociones {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--azul-electrico);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.carousel-item {
+  max-height: 500px;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 500px;
+}
+
+/* ----- Formulario de Contacto ----- */
+#contacto {
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+#contacto .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--azul-electrico);
+  color: white;
+}
+
+#contacto .form-control:focus {
+  box-shadow: 0 0 15px var(--verde-neon);
+  border-color: var(--verde-neon);
+}
+
+/* ================= ELEMENTOS DE DISEÑO ================= */
+h1, h2, h3 {
+  text-shadow: 0 0 10px var(--azul-electrico);
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--verde-neon);
+  margin: 15px auto;
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+/* ================= MEDIA QUERIES ================= */
+@media (max-width: 768px) {
+  #catalogo .card {
+    margin-bottom: 2rem;
+  }
+  
+  .carousel-item img {
+    height: 300px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* ================= ELEMENTOS ELIMINADOS/OPTIMIZADOS ================= */
+/*
+  - Eliminado: width: 100%!important en #catalogo .card (redundante)
+  - Simplificado: Animación del botón (muy intensa para UX)
+  - Optimizado: Valores de opacidad en degradados
+  - Corregido: z-index en body::before para evitar superposición
+  - Eliminado: position: relative innecesario en headers
+  - Unificado: Transiciones y efectos hover
+*/
+
+* {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* En tu archivo style.css */
+#registroModal .form-control {
+  background: rgba(255, 255, 255, 0.1)!important;
+  border: 1px solid var(--azul-electrico);
+  transition: all 0.3s ease;
+}
+
+#registroModal .form-control:focus {
+  box-shadow: 0 0 15px var(--verde-neon);
+  border-color: var(--verde-neon);
+}
+
+#registroModal .modal-header {
+  border-bottom: 2px solid var(--verde-neon);
+}
+
+#registroModal .modal-content {
+  background: #000000d9!important;
+  backdrop-filter: blur(10px);
+}
+
+
+/* Asegurar que el modal funcione correctamente */
+.modal {
+    z-index: 1060 !important; /* Debe ser mayor que el z-index:1 del body::before */
+}
+
+/* Mejorar respuesta táctil */
+.btn-close, 
+#vaciarCarritoBtn, 
+#finalizarCompraBtn {
+    touch-action: manipulation; /* Elimina el delay en móviles */
+    position: relative;
+}
